@@ -3,31 +3,28 @@ import java.util.Random;
 public class Main extends ProfiledClass{
     @Override
     public void run() {
-        long ergebnis = 1;
-        for (long i = 1; i < 1000000000; i++) {
-            ergebnis += i;
-        }
-        System.out.println("Ergebnis ist: " + ergebnis);
-    }
-    public static void main(String[] args) {
-        Profiler profiler = new Profiler(Main.class);
-        profiler.start();
-        profiler.printResults();
-
-        DoppListe doppListe = new DoppListe();
-
+        DoppListe liste = new DoppListe();
         Random r = new Random();
-        int zufahlzahl = 10000;
-        for(int k = 0; k <10000; k++){
-            doppListe.prepend(r.nextInt(zufahlzahl));
+        for(int k = 0; k <10; k++){
+            liste.prepend(r.nextInt(10));
         }
+        liste.get(3);                             //ein Element an einer gegebenen Position abrufen
 
-        doppListe.removeElem(2);
+        liste.contains(5);                        //prüft, ob das übergebene Element in der Liste enthalten ist
 
-        System.out.println("In der Position 1 befindet sich Element: "+doppListe.get(1));
+        liste.size();                             //gibt aus, wie viele Elemente in der Liste enthalten sind
+        System.out.println("___________________");
 
-        System.out.println("Element befindet sich in der Position: "+doppListe.contains(555));
+        liste.print();                            //Die Zahlen werden vom Anfang bis zum Ende ausgegeben.
+        liste.removeElem(4);                 //Element an einer angegebenen Position löschen
+        System.out.println("____________________");
+        liste.size();                              // löscht ein Element
+        liste.print();
+    }
 
-        System.out.println("Anzahl von Elementen: "+doppListe.size());
+    public static void main(String[] args) {
+        Profiler profMain = new Profiler(Main.class);
+        profMain.start();
+        profMain.printResults();
     }
 }
